@@ -47,25 +47,32 @@ public class GestureListViewAdapter extends BaseAdapter
 	{
 		Sample item = getItem(position);
 
-		ViewHolder holder;
-
-		if (convertView == null || convertView.getTag().equals("list_item"))
+		if(item.isFlagged())
 		{
-			convertView = mInflater.inflate(R.layout.list_sample_item, null);
-
-			holder = new ViewHolder();
-			holder.name = (TextView) convertView.findViewById(R.id.list_item_name);
-			holder.count = (TextView) convertView.findViewById(R.id.list_item_count);
-			
-			convertView.setTag(holder);
+			convertView = mInflater.inflate(R.layout.extensible_list_item, null);
 		}
 		else
 		{
-			holder = (ViewHolder) convertView.getTag();
-		}
+			ViewHolder holder;
 
-		holder.name.setText(item.getName());
-		holder.count.setText(""+item.getCount());
+			if (convertView == null || convertView.getTag().equals("list_item"))
+			{
+				convertView = mInflater.inflate(R.layout.list_sample_item, null);
+
+				holder = new ViewHolder();
+				holder.name = (TextView) convertView.findViewById(R.id.list_item_name);
+				holder.count = (TextView) convertView.findViewById(R.id.list_item_count);
+				
+				convertView.setTag(holder);
+			}
+			else
+			{
+				holder = (ViewHolder) convertView.getTag();
+			}
+
+			holder.name.setText(item.getName());
+			holder.count.setText(""+item.getCount());
+		}
 			
 		return convertView;
 	}
