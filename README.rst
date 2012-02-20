@@ -33,7 +33,7 @@ This branch is a first experiment with a ScaleGestureDetector.
 
 Idea:
 
-1. The pinch gesture is somehow like a dragging gesture, we can get the X and Y coordinates of center of the two fingers on the screen.
+1. The pinch gesture is somehow like a dragging gesture, we can get the X and Y coordinates of center of the two fingers on the screen
 2. Get the index position of the first visible item in the list
 3. Get the index position of the last visible item in the list
 4. Iterate from the first index to the last with the getChildAt function
@@ -42,6 +42,18 @@ Idea:
 7. Use the scale factor to grow and shrink the newly added item
 
 Result: Messy ListView scroll side effect but the item is added and its height can be manipulated.
+
+Branch: attemps-via-touch-listener
+----------------------------------
+
+Idea:
+
+1. Get the position of each fingers 'pointers' on the screen in ACTION_POINTER_DOWN of MotionEvent and identify above from below finger
+2. Add a new item inside the list and notify the adapter
+3. When a finger is moved (inside ACTION_MOVE), adjust the height of the item according to the delta between the previous move and this one
+4. Take care of the scroll position when moving the above finger
+
+Result: Still scroll side effects but interaction is much more close to the result we want to implement.
 
 Branch: 
 -------
