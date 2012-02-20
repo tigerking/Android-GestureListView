@@ -186,12 +186,13 @@ public class GestureListViewActivity extends ListActivity
 						if (mode == ZOOM && this.position != null)
 						{
 							mode = NONE;
-
-							mList.remove(this.position.intValue());
-
+							
+							mList.get(this.position.intValue()).setFlagged(false);
+							//mList.remove(this.position.intValue());
+							
 					    	((GestureListViewAdapter)getListAdapter()).notifyDataSetChanged();
 					    	
-					    	getListView().scrollTo(0, this.scrollPosition);
+					    	getListView().scrollTo(0, this.scrollPosition + this.extensible.getHeight()/4);
 
 							return true;
 						}
