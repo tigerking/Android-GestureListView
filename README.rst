@@ -64,3 +64,6 @@ Last word
 =========
 
 Let's be awesome!
+
+.. image:: https://github.com/arnaudbos/GestureListView/raw/master/carnivore.jpg
+   :alt: Carnivore image: Keep being awesome!
