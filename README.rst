@@ -53,7 +53,7 @@ Idea:
 3. When a finger is moved (inside ACTION_MOVE), adjust the height of the item according to the delta between the previous move and this one
 4. Take care of the scroll position when moving the above finger
 
-Result: Still scroll side effects but interaction is much more close to the result we want to implement.
+Result: Still scroll side effects but interaction is much more close to the result we want to implement. When the user just puts his fingers on the screen, without moving (which is extremely difficult and not willing to happen often, but still), the new item is drawn with its full default size, and then redrawn to height close of 0 when fingers are moved. This is uggly is you succeed in noticing it.
 
 Branch: 
 -------
