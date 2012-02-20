@@ -49,6 +49,7 @@ public class GestureListViewActivity extends ListActivity
 			private Integer position = null;
 			private float previousAboveDiffSpan = 0;
 			private float previousBelowDiffSpan = 0;
+			private int scrollPosition = 0;
 
 			@Override
 			public boolean onTouch(View view, MotionEvent event)
@@ -61,6 +62,8 @@ public class GestureListViewActivity extends ListActivity
 					case MotionEvent.ACTION_POINTER_DOWN:
 						firstPointerY = event.getY(0);
 						secondPointerY = event.getY(1);
+						
+						this.scrollPosition = getListView().getScrollY();
 						
 						if (firstPointerY < secondPointerY)
 						{
@@ -170,6 +173,11 @@ public class GestureListViewActivity extends ListActivity
 					    	this.extensible.setLayoutParams(params);
 
 							Log.d(TAG, "height =" + height);
+							
+							if (getListView().getScrollY() <= scrollPosition)
+							{
+								getListView().scrollTo(0, scrollPosition);
+							}
 
 							return true;
 						}
@@ -182,6 +190,8 @@ public class GestureListViewActivity extends ListActivity
 							mList.remove(this.position.intValue());
 
 					    	((GestureListViewAdapter)getListAdapter()).notifyDataSetChanged();
+					    	
+					    	getListView().scrollTo(0, this.scrollPosition);
 
 							return true;
 						}
