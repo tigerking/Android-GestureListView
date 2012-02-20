@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import fr.sneakernet.R;
 import fr.sneakernet.model.Sample;
@@ -46,26 +47,33 @@ public class GestureListViewAdapter extends BaseAdapter
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		Sample item = getItem(position);
-
-		ViewHolder holder;
-
-		if (convertView == null || convertView.getTag().equals("list_item"))
+		
+		if(item.isFlagged())
 		{
-			convertView = mInflater.inflate(R.layout.list_sample_item, null);
-
-			holder = new ViewHolder();
-			holder.name = (TextView) convertView.findViewById(R.id.list_item_name);
-			holder.count = (TextView) convertView.findViewById(R.id.list_item_count);
-			
-			convertView.setTag(holder);
+			convertView = mInflater.inflate(R.layout.extensible_list_item, null);
 		}
 		else
 		{
-			holder = (ViewHolder) convertView.getTag();
+			ViewHolder holder;
+	
+			if (convertView == null || convertView.getTag().equals("extensible"))
+			{
+				convertView = mInflater.inflate(R.layout.list_sample_item, null);
+	
+				holder = new ViewHolder();
+				holder.name = (TextView) convertView.findViewById(R.id.list_item_name);
+				holder.count = (TextView) convertView.findViewById(R.id.list_item_count);
+				
+				convertView.setTag(holder);
+			}
+			else
+			{
+				holder = (ViewHolder) convertView.getTag();
+			}
+	
+			holder.name.setText(item.getName());
+			holder.count.setText(""+item.getCount());
 		}
-
-		holder.name.setText(item.getName());
-		holder.count.setText(""+item.getCount());
 			
 		return convertView;
 	}
